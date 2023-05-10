@@ -3,10 +3,12 @@ package com.simpletripbe.moduleapi.applications.mycarrier.service;
 import com.simpletripbe.moduledomain.mycarrier.api.MainCarrierService;
 import com.simpletripbe.moduledomain.mycarrier.dto.CarrierListDTO;
 import com.simpletripbe.moduledomain.mycarrier.dto.TicketTypeDTO;
-import com.simpletripbe.moduledomain.mycarrier.entity.Country;
+import com.simpletripbe.moduledomain.mycarrier.dto.TicketUrlDTO;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -48,9 +50,15 @@ public class MyCarrierService {
         mainCarrierService.addStamp(carrierListDTO);
     }
 
-    @Transactional(readOnly = true)
-    public void saveInfo(TicketTypeDTO ticketTypeDTO) {
-        mainCarrierService.saveTicketInfo(ticketTypeDTO);
+    @Transactional
+    public TicketUrlDTO saveUrl(TicketUrlDTO ticketUrlDTO) {
+        return mainCarrierService.saveTicketUrl(ticketUrlDTO);
     }
+
+    @Transactional
+    public TicketUrlDTO saveFile(TicketUrlDTO ticketUrlDTO, MultipartFile multipartFile) throws FileUploadException {
+        return mainCarrierService.saveTicketFile(ticketUrlDTO, multipartFile);
+    }
+
 
 }

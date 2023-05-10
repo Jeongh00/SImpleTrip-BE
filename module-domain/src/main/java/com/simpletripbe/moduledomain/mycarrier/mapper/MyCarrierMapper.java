@@ -3,6 +3,7 @@ package com.simpletripbe.moduledomain.mycarrier.mapper;
 import com.simpletripbe.moduledomain.batch.dto.MyBagSaveDTO;
 import com.simpletripbe.moduledomain.mycarrier.dto.CarrierListDTO;
 import com.simpletripbe.moduledomain.mycarrier.dto.TicketTypeDTO;
+import com.simpletripbe.moduledomain.mycarrier.dto.TicketUrlDTO;
 import com.simpletripbe.moduledomain.mycarrier.entity.CarrierCountry;
 import com.simpletripbe.moduledomain.mycarrier.entity.MyCarrier;
 import com.simpletripbe.moduledomain.mycarrier.entity.Ticket;
@@ -43,14 +44,12 @@ public interface MyCarrierMapper {
     CarrierCountry toCarrierCountryEntity(CarrierListDTO carrierListDTO);
 
     @Mappings({
-            @Mapping(source = "type", target = "type", ignore = true),
-            @Mapping(source = "ticketUrl", target = "ticketUrl", ignore = true),
-            @Mapping(source = "imageUrl", target = "imageUrl", ignore = true),
-            @Mapping(source = "title", target = "title", ignore = true),
-            @Mapping(source = "sequence", target = "sequence", ignore = true),
-//            @Mapping(target = "creDate", expression = "java(java.time.LocalDateTime.now())")
+            @Mapping(source = "type", target = "type"),
+            @Mapping(source = "url", target = "ticketUrl"),
+            @Mapping(source = "myCarrier", target = "myCarrier"),
+            @Mapping(source = "title", target = "title")
     })
-    Ticket toTicketEntity(TicketTypeDTO ticketTypeDTO);
+    Ticket toTicketEntity(TicketUrlDTO ticketUrlDTO);
 
     @Mappings({
             @Mapping(source = "type", target = "type", ignore = true),

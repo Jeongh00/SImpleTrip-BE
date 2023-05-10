@@ -26,6 +26,11 @@ spring:
     host: ${REDIS_HOST}
     port: ${REDIS_PORT}
 
+  servlet:
+    multipart:
+      maxFileSize: 20MB
+      maxRequestSize: 20MB
+
 logging:
   level:
     sql: info
@@ -57,3 +62,16 @@ jwt:
   live:
     atk: 1800000 # 60 * 30 * 1000
     rtk: 2592000000 # 60 * 60 * 24 * 30 * 1000
+
+# AWS S3 setting
+cloud:
+  aws:
+    credentials:
+      accessKey: ${S3_ACCESS_KEY}
+      secretKey: ${S3_SECRET_KEY}
+    s3:
+      bucket: ${S3_BUCKET_NAME}
+    region:
+      static: ${S3_REGION}
+    stack:
+      auto: false

@@ -3,6 +3,7 @@ package com.simpletripbe.moduledomain.mycarrier.entity;
 import com.simpletripbe.moduledomain.basetime.BaseTimeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 @Builder
 public class Ticket extends BaseTimeEntity {
 

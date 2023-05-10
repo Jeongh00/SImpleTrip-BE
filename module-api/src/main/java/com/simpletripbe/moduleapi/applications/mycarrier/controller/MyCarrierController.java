@@ -7,12 +7,13 @@ import com.simpletripbe.modulecommon.common.response.ApiResponse;
 import com.simpletripbe.modulecommon.common.util.EmptyResponse;
 import com.simpletripbe.moduledomain.mycarrier.dto.CarrierListDTO;
 import com.simpletripbe.moduledomain.mycarrier.dto.TicketTypeDTO;
-import com.simpletripbe.moduledomain.mycarrier.entity.Country;
-import io.jsonwebtoken.Jwts;
+import com.simpletripbe.moduledomain.mycarrier.dto.TicketUrlDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -134,17 +135,29 @@ public class MyCarrierController {
     }
 
     /**
-     * 상세페이지 - 티켓 이미지, 파일, 링크 저장
+     * 상세 페이지 - 티켓 링크 저장
      */
-    @Operation(summary = "티켓 추가 api", description = "addTicketInfo")
-    @PostMapping("addTicketInfo")
-    public ApiResponse<EmptyResponse> addTicketInfo(
-            @RequestBody TicketTypeDTO ticketTypeDTO
-            ) {
+    @Operation(summary = "티켓 url 추가 api", description = "addTicketInfo")
+    @PostMapping("addTicketURL")
+    public ApiResponse<TicketUrlDTO> addTicketInfo(
+            @RequestBody TicketUrlDTO ticketUrlDTO
+    ) {
 
-        myCarrierService.saveInfo(ticketTypeDTO);
+        return ApiResponse.success(myCarrierService.saveUrl(ticketUrlDTO));
 
-        return ApiResponse.success(EmptyResponse.of());
     }
 
+    /**
+     * 상세 페이지 - 티켓 이미지, 파일 저장
+     */
+    @Operation(summary = "티켓 파일 추가 api", description = "addTicketFile")
+    @PostMapping("addTicketFile")
+    public ApiResponse<TicketUrlDTO> addTicketFile(
+            @RequestPart(value = "dto") TicketUrlDTO ticketUrlDTO,
+            @RequestPart(value = "file")MultipartFile multipartFile
+    ) throws FileUploadException {
+
+        return ApiResponse.success(myCarrierService.saveFile(ticketUrlDTO, multipartFile));
+
+    }
 }

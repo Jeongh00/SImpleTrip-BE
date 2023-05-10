@@ -22,6 +22,11 @@ spring:
     jdbc:
       initialize-schema: always
 
+  servlet:
+    multipart:
+      maxFileSize: 20MB
+      maxRequestSize: 20MB
+
 logging:
   level:
     sql: info
@@ -41,3 +46,16 @@ app:
       url: https://oauth2.googleapis.com/token
     userinfo:
       url: https://www.googleapis.com/oauth2/vi/userinfo
+
+# AWS S3 setting
+cloud:
+  aws:
+    credentials:
+      accessKey: ${S3_ACCESS_KEY}
+      secretKey: ${S3_SECRET_KEY}
+    s3:
+      bucket: ${S3_BUCKET_NAME}
+    region:
+      static: ${S3_REGION}
+    stack:
+      auto: false

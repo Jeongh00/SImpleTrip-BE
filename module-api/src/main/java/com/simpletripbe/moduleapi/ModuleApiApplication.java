@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableJpaAuditing
 @SpringBootApplication(scanBasePackages = "com.simpletripbe")
 @EnableBatchProcessing
-@ComponentScan(basePackages = {"com.batch.modulebatch", "com.simpletripbe.moduledomain", "com.simpletripbe.modulecommon"})
+@ComponentScan(basePackages = {"com.batch.modulebatch", "com.simpletripbe.moduledomain", "com.simpletripbe.modulecommon", "com.simpletripbe.moduleapi"})
 public class ModuleApiApplication {
 
 	public static void main(String[] args) {
